@@ -1,0 +1,18 @@
+Query the list of CITY names ending with vowels (a, e, i, o, u) from STATION. Your result cannot contain duplicates.
+Input Format
+The STATION table is described as follows:
+
+	STATION
+Field		Type
+ID		NUMBER
+CITY		VARCHAR2(21)
+STATE		VARCHAR2(2)
+LAT_N		NUMBER
+LONG_W		NUMBER
+
+Решение:
+//Таким методом мы перебираем вручную каждый символ, для данной задачи это хватает, но с большими данными этот тип метода не подойдет так как нагружает систему из за чего запрос будет медленным
+SELECT DISTINCT city FROM station WHERE SUBSTRING(city, -1, 1) IN ('A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u');
+
+//Этот метод уже точечно отбирает символ, а именно проверяет гласные в конце строки
+SELECT DISTINCT city FROM station WHERE city RLIKE '[aeiouAEIOU]$';
