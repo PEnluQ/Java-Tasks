@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args){
+        int oneHundred = 0;
+        int fifty = 0;
+        int twenty = 0;
+        int ten = 0;
+        int five = 0;
+        int two = 0;
+        int one = 0;
+
+        Scanner in = new Scanner(System.in);
+        System.out.print("Введите число больше 0 и меньше 1 лимона");
+        int num = in.nextInt();
+        if(num > 0 && num < 1000000) {
+            oneHundred = num / 100;
+            int restOH = num % 100;
+            fifty = restOH / 50;
+            int restFY = restOH % 50;
+            twenty = restFY / 20;
+            int restTY = restFY % 20;
+            ten = restTY / 10;
+            int restTN = restTY % 10;
+            five = restTN / 5;
+            int restFE = restTN % 5;
+            two = restFE / 2;
+            one = restFE % 2;
+
+            System.out.printf(num + "\n" + oneHundred + " nota(s) de R$ 100,00 \n" + fifty + " nota(s) de R$ 50,00  \n" +
+                    twenty + " nota(s) de R$ 20,00 \n" + ten + " nota(s) de R$ 10,00 \n" + five + " nota(s) de R$ 5,00 \n"
+                    + two + " nota(s) de R$ 2,00 \n" + one + " nota(s) de R$ 1,00");
+        } else {
+            System.out.print("АШЫПКА");
+        }
+        in.close();
+    }
+}
