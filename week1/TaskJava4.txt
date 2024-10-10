@@ -1,0 +1,29 @@
+Задача:
+https://judge.beecrowd.com/en/problems/view/1182
+
+import java.util.Scanner;
+
+public class ColumnnArray {
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+        double[][] M = new double[12][12];
+        int C = scanner.nextInt();
+        char T = scanner.next().charAt(0);
+        double sum = 0;
+        for(int i = 0; i < 12; i++){
+            for(int j = 0; j < 12; j++) {
+                M[i][j] = scanner.nextDouble();
+            }
+        }
+        for(int i = 0; i < 12; i++){
+            sum += M[i][C];
+        }
+        double average = sum / 12;
+        if(T == 'S'){
+            System.out.printf("%.1f%n", sum);
+        } else if (T == 'M') {
+            System.out.printf("%.1f%n", average);
+        }
+        scanner.close();
+    }
+}
