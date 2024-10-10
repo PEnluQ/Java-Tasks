@@ -1,0 +1,50 @@
+Задача:
+https://judge.beecrowd.com/en/problems/view/1045
+
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class TriangleTypes {
+    public static void main(String[] args){
+        Scanner in = new Scanner(System.in);
+        double firstValue = getInput(in, "");
+        double secondValue = getInput(in, "");
+        double thirtyValue = getInput(in, "");
+        if(firstValue > 0 && secondValue > 0 && thirtyValue > 0) {
+            Double[] arrNumbers = {firstValue, secondValue, thirtyValue};
+            Arrays.sort(arrNumbers, Collections.reverseOrder());
+            double a = arrNumbers[0];
+            double b = arrNumbers[1];
+            double c = arrNumbers[2];
+            double a2 = Math.pow(a, 2);
+            double b2 = Math.pow(b, 2);
+            double c2 = Math.pow(c, 2);
+
+            if(a >= b+c){
+                System.out.println("NAO FORMA TRIANGULO");
+            } else if(a2 > b2+c2){
+                System.out.println("TRIANGULO OBTUSANGULO");
+            }
+            if(a2 < b2+c2){
+                System.out.println("TRIANGULO ACUTANGULO");
+            }
+            if (a == b && a == c) {
+                System.out.println("TRIANGULO EQUILATERO");
+            }
+            if(a2 == b2+c2){
+                System.out.println("TRIANGULO RETANGULO");
+                }
+            if (a == b && a != c || b==c && b !=a || c==a && c!=b) {
+                System.out.println("TRIANGULO ISOSCELES");
+            }
+        } else {
+            System.out.print("Error");
+        }
+    }
+
+    private static double getInput(Scanner scanner, String letter) {
+        System.out.printf("", letter);
+        return scanner.nextDouble();
+    }
+}
