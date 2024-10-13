@@ -1,0 +1,45 @@
+Задача:
+https://judge.beecrowd.com/en/problems/view/1047
+
+import java.util.Scanner;
+
+public class GameMinutes {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int enterHour = scanner.nextInt();
+        int enterMinute = scanner.nextInt();
+        int lastHour = scanner.nextInt();
+        int lastMinute = scanner.nextInt();
+        if(enterHour <0 enterMinute <0  lastHour <0 lastMinute <0) {
+            System.out.println("Error");
+            scanner.close();
+            return;
+        }
+        if(enterHour>23 ||enterMinute >59 ||lastHour >23  lastMinute >59) {
+            System.out.println("Error");
+            scanner.close();
+            return;
+        }
+        int durationMinutes;
+        int enterAllMinutes = enterHour * 60 + enterMinute;
+        int lastAllMinutes = lastHour * 60+lastMinute;
+        if (lastAllMinutes >= enterAllMinutes) {
+            durationMinutes = lastAllMinutes - enterAllMinutes;
+        } else {
+            durationMinutes = (1440 - enterAllMinutes) + lastAllMinutes;
+        }
+        if (durationMinutes > 1440) {
+            System.out.println("Error");
+        } else {
+            int durationHours = durationMinutes / 60;
+            int remainingMinutes = durationMinutes % 60;
+            if (enterHour == lastHour && enterMinute == lastMinute) {
+                durationHours = 24;
+                remainingMinutes = 0;
+            }
+            System.out.println("O JOGO DUROU " + durationHours + " HORA(S) E " + remainingMinutes +  " MINUTO(S)");
+        }
+
+        scanner.close();
+    }
+}
