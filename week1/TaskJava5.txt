@@ -10,12 +10,12 @@ public class GameMinutes {
         int enterMinute = scanner.nextInt();
         int lastHour = scanner.nextInt();
         int lastMinute = scanner.nextInt();
-        if(enterHour <0 enterMinute <0  lastHour <0 lastMinute <0) {
+        if(enterHour <0 || enterMinute <0 || lastHour <0 || lastMinute <0) {
             System.out.println("Error");
             scanner.close();
             return;
         }
-        if(enterHour>23 ||enterMinute >59 ||lastHour >23  lastMinute >59) {
+        if(enterHour>23 ||enterMinute >59 ||lastHour >23 || lastMinute >59) {
             System.out.println("Error");
             scanner.close();
             return;
