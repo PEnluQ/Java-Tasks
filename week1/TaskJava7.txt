@@ -1,0 +1,17 @@
+Задача:
+https://judge.beecrowd.com/en/problems/view/1098
+
+import java.text.DecimalFormat;
+public class SequenceIJ4 {
+    public static void main(String[] args) {
+        DecimalFormat df = new DecimalFormat("#.#");
+        for (float I = 0; I <= 2.2; I += 0.2) {
+            for (int j = 1; j <= 3; j++) {
+                float J = j + I;
+                String formattedNumberI = df.format(I);
+                String formattedNumberJ = df.format(J);
+                System.out.print("I=" + formattedNumberI + " J=" + formattedNumberJ + "\n");
+            }
+        }
+    }
+}
