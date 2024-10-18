@@ -1,0 +1,40 @@
+Задача:
+https://judge.beecrowd.com/en/problems/view/1145
+
+import java.util.Scanner;
+
+public class LogicalSequence2 {
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+        int x = scanner.nextInt();
+        int y = scanner.nextInt();
+        SequenceNumbers sequence1 = new SequenceNumbers(x,y);
+        sequence1.makeSequenceXY();
+        scanner.close();
+    }
+}
+class SequenceNumbers {
+    int x;
+    int y;
+    SequenceNumbers(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+    public void makeSequenceXY(){
+        if(x > 1 && x < 20 && y > x && y < 100000){
+            StringBuilder stringNumbers = new StringBuilder();
+            for (int i = 1; i <= y; i++) {
+                stringNumbers.append(i).append(" ");
+                if (i % x == 0) {
+                    System.out.println(stringNumbers.toString().trim());
+                    stringNumbers.setLength(0);
+                }
+            }
+            if (!stringNumbers.isEmpty()) {
+                System.out.println(stringNumbers.toString().trim());
+            }
+        } else {
+            System.out.println("Error");
+        }
+    }
+}
