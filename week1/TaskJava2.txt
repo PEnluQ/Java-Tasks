@@ -1,0 +1,75 @@
+Задача:
+https://judge.beecrowd.com/en/problems/view/1021
+
+import java.util.Scanner;
+
+public class BankCoin {
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+        BankCalculator bankCalculator = new BankCalculator();
+        bankCalculator.setNumberValue(scanner.nextDouble());
+        bankCalculator.calculateMoney();
+        scanner.close();
+    }
+}
+
+class BankCalculator {
+    int count;
+    double numberValue;
+    int numberF;
+
+    void setNumberValue(double numberValue){
+        this.numberValue = numberValue;
+    }
+    public void calculateMoney(){
+        System.out.println("NOTAS:");
+        numberF = (int) Math.round(numberValue * 100);
+        count = numberF / 10000;
+        numberF %= 10000;
+        System.out.println(count + " nota(s) de R$ 100.00");
+
+        count = numberF / 5000;
+        numberF %= 5000;
+        System.out.println(count + " nota(s) de R$ 50.00");
+
+        count = numberF / 2000;
+        numberF %= 2000;
+        System.out.println(count + " nota(s) de R$ 20.00");
+
+        count = numberF / 1000;
+        numberF %= 1000;
+        System.out.println(count + " nota(s) de R$ 10.00");
+
+        count = numberF / 500;
+        numberF %= 500;
+        System.out.println(count + " nota(s) de R$ 5.00");
+
+        count = numberF / 200;
+        numberF %= 200;
+        System.out.println(count + " nota(s) de R$ 2.00");
+
+        System.out.println("MOEDAS:");
+        count = numberF / 100;
+        numberF %= 100;
+        System.out.println(count + " moeda(s) de R$ 1.00");
+
+        count = numberF / 50;
+        numberF %= 50;
+        System.out.println(count + " moeda(s) de R$ 0.50");
+
+        count = numberF / 25;
+        numberF %= 25;
+        System.out.println(count + " moeda(s) de R$ 0.25");
+
+        count = numberF / 10;
+        numberF %= 10;
+        System.out.println(count + " moeda(s) de R$ 0.10");
+
+        count = numberF / 5;
+        numberF %= 5;
+        System.out.println(count + " moeda(s) de R$ 0.05");
+
+        count = numberF;
+        System.out.println(count + " moeda(s) de R$ 0.01");
+    }
+}
