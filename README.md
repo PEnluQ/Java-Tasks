@@ -1,2 +1,1 @@
-# SQLTasks
-https://www.hackerrank.com/challenges
+# Java Tasks
