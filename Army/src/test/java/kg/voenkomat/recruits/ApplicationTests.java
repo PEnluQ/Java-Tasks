@@ -1,10 +1,10 @@
-package kg.voenkomat.mobilization;
+package kg.voenkomat.recruits;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MobilizationApplicationTests {
+class ApplicationTests {
 
 	@Test
 	void contextLoads() {

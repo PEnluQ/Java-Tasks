@@ -1,11 +1,11 @@
-package kg.voenkomat.mobilization;
+package kg.voenkomat.recruits;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MobilizationApplication {
+public class Application {
 	public static void main(String[] args) {
-		SpringApplication.run(MobilizationApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 }
