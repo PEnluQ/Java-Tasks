@@ -17,7 +17,7 @@ public class Recruit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column
+    @Column(length = 20)//todo add all required params
     String name;
 
     @Column
