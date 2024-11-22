@@ -27,4 +27,17 @@ public class RecruitService {
     public Optional<RecruitDTO> getRecruitById(Long Id){
         return recruitRepo.findById(Id).map(recruit -> new RecruitDTO(recruit.getId(), recruit.getName(), recruit.getAge(), recruit.isWorkability()));
     }
+    public RecruitDTO createRecruit(RecruitDTO recruitDTO){
+        Recruit recruit = Recruit.builder()
+                .name(recruitDTO.getName())
+                .age(recruitDTO.getAge())
+                .workability(recruitDTO.getWorkability())
+                .build();
+        Recruit savedRecruit = recruitRepo.save(recruit);
+        return RecruitDTO.builder()
+                .name(savedRecruit.getName())
+                .age(savedRecruit.getAge())
+                .workability(savedRecruit.isWorkability())
+                .build();
+    }
 }
