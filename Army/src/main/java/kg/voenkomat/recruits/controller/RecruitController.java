@@ -54,4 +54,13 @@ public class RecruitController {
                     .body("Произошла ошибка: " + e.getMessage());
         }
     }
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<?> updateRecruit(@PathVariable Long id, @RequestBody RecruitDTO recruitDTO){
+        try {
+            return ResponseEntity.ok(recruitService.updateRecruit(id, recruitDTO));
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Произошла ошибка: " + e.getMessage());
+        }
+    }
 }

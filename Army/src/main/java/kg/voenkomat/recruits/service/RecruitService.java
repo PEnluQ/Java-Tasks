@@ -9,6 +9,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -38,6 +39,21 @@ public class RecruitService {
                 .name(savedRecruit.getName())
                 .age(savedRecruit.getAge())
                 .workability(savedRecruit.isWorkability())
+                .build();
+    }
+    public RecruitDTO updateRecruit(Long id, RecruitDTO recruitDTO){
+        Recruit existingRecruit = recruitRepo.findById(id).orElseThrow(() -> new NoSuchElementException("Рекрут с id " + id + " не найден"));
+        existingRecruit = Recruit.builder()
+                .id(existingRecruit.getId())
+                .name(recruitDTO.getName())
+                .age(recruitDTO.getAge())
+                .workability(recruitDTO.getWorkability())
+                .build();
+        Recruit updatedRecruit = recruitRepo.save(existingRecruit);
+        return RecruitDTO.builder()
+                .name(updatedRecruit.getName())
+                .age(updatedRecruit.getAge())
+                .workability(updatedRecruit.isWorkability())
                 .build();
     }
 }
