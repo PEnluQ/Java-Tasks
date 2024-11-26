@@ -5,12 +5,9 @@ import kg.voenkomat.recruits.service.RecruitService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping
@@ -20,62 +17,31 @@ public class RecruitController {
     RecruitService recruitService;
 
     @GetMapping("/")
-    public ResponseEntity<?> getAllRecruits() {
-        List<RecruitDTO> recruits = recruitService.getAllRecruits();
-        if (recruits.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Список пуст");
-        }
-
-        return ResponseEntity.ok(recruits);
+    public List<RecruitDTO> getAllRecruits() {
+        return recruitService.getAllRecruits();
     }
 
 
     @GetMapping("/recruit/{id}")
-    public ResponseEntity<?> getItemById(@PathVariable Long id) {
-        try {
-            Optional<RecruitDTO> recruit = recruitService.getRecruitById(id);
-            if (recruit.isPresent()) {
-                return ResponseEntity.ok(recruit.get());
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Рекрут с ID " + id + " не найден");
-            }
-        } catch (Exception e) {//todo this is exra
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Произошла ошибка: " + e.getMessage());
-        }
+    public RecruitDTO getRecruitById(@PathVariable Long id) {
+        return recruitService.getRecruitById(id);
     }
 
 
     @PostMapping
-    public ResponseEntity<?> createRecruit(@RequestBody RecruitDTO recruitDTO) {
-        try {
-            return ResponseEntity.ok(recruitService.createRecruit(recruitDTO));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Произошла ошибка: " + e.getMessage());
-        }
+    public RecruitDTO createRecruit(@RequestBody RecruitDTO recruitDTO) {
+        return recruitService.createRecruit(recruitDTO);
     }
 
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<?> updateRecruit(@PathVariable Long id, @RequestBody RecruitDTO recruitDTO) {
-        try {
-            return ResponseEntity.ok(recruitService.updateRecruit(id, recruitDTO));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Произошла ошибка: " + e.getMessage());
-        }
+    public RecruitDTO updateRecruit(@PathVariable Long id, @RequestBody RecruitDTO recruitDTO) {
+        return recruitService.updateRecruit(id, recruitDTO);
     }
 
 
     @DeleteMapping("/remove/{id}")
-    public ResponseEntity<?> deleteRecruit(@PathVariable Long id) {
-        try {
-            recruitService.deleteRecruit(id);
-            return ResponseEntity.ok("Удален рекрут с id " + id);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Произошла ошибка: " + e.getMessage());
-        }
+    public void deleteRecruit(@PathVariable Long id) {
+        recruitService.deleteRecruit(id);
     }
 }

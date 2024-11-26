@@ -2,6 +2,8 @@ package kg.voenkomat.recruits.service.impl;
 
 import kg.voenkomat.recruits.dto.RecruitDTO;
 import kg.voenkomat.recruits.entity.Recruit;
+import kg.voenkomat.recruits.exception.CustomException;
+import kg.voenkomat.recruits.mapper.RecruitMapper;
 import kg.voenkomat.recruits.repo.RecruitRepo;
 import kg.voenkomat.recruits.service.RecruitService;
 import lombok.AccessLevel;
@@ -10,67 +12,55 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
+@Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-@Service
-public class RecruitServiceImpl implements RecruitService {//todo add interface
+public class RecruitServiceImpl implements RecruitService {
+    final RecruitMapper recruitMapper;
     RecruitRepo recruitRepo;
 
     @Override
     public List<RecruitDTO> getAllRecruits() {
-        return recruitRepo.findAll().stream()
-                .map(recruit -> new RecruitDTO(recruit.getId(), recruit.getName(), recruit.getAge(), recruit.isWorkability()))
+        List<Recruit> recruits = recruitRepo.findAll();
+
+        return recruits.stream()
+                .map(recruitMapper::toDTO)
                 .toList();
     }
 
     @Override
-    public Optional<RecruitDTO> getRecruitById(Long Id) {//todo read java convension
-        return recruitRepo.findById(Id).map(recruit -> new RecruitDTO(recruit.getId(), recruit.getName(), recruit.getAge(), recruit.isWorkability()));
+    public RecruitDTO getRecruitById(Long id) {
+        return recruitMapper.toDTO(getById(id));
     }
 
     @Override
     public RecruitDTO createRecruit(RecruitDTO recruitDTO) {
-        Recruit recruit = Recruit.builder()
-                .name(recruitDTO.getName())
-                .age(recruitDTO.getAge())
-                .workability(recruitDTO.getWorkability())
-                .build();
+        Recruit recruit = recruitMapper.toEntity(recruitDTO);
         recruitRepo.save(recruit);
 
-        return RecruitDTO.builder()
-                .id(recruit.getId())
-                .name(recruit.getName())
-                .age(recruit.getAge())
-                .workability(recruit.isWorkability())
-                .build();
+        return recruitMapper.toDTO(recruit);
     }
 
     @Override
     public RecruitDTO updateRecruit(Long id, RecruitDTO recruitDTO) {
-        Recruit existingRecruit = recruitRepo.findById(id).
-                orElseThrow(() -> new NoSuchElementException("Рекрут с id %s не найден".formatted(id)));
-        existingRecruit = Recruit.builder()
-                .id(existingRecruit.getId())
-                .name(recruitDTO.getName())
-                .age(recruitDTO.getAge())
-                .workability(recruitDTO.getWorkability())
-                .build();
+        Recruit existingRecruit = getById(id);
+        recruitMapper.updateEntityFromDTO(recruitDTO, existingRecruit);
         Recruit updatedRecruit = recruitRepo.save(existingRecruit);
 
-        return RecruitDTO.builder()
-                .name(updatedRecruit.getName())
-                .age(updatedRecruit.getAge())
-                .workability(updatedRecruit.isWorkability())
-                .build();
+        return recruitMapper.toDTO(updatedRecruit);
     }
 
     @Override
     public void deleteRecruit(Long id) {
-        Recruit recruit = recruitRepo.findById(id).
-                orElseThrow(() -> new NoSuchElementException("Рекрут с id " + id + " не найден"));//todo with formatter
+        Recruit recruit = getById(id);
         recruitRepo.delete(recruit);
+    }
+
+    private Recruit getById(Long id) {
+        return recruitRepo.findById(id).orElseThrow(() -> new CustomException(
+                "Not found id %s".formatted(id),
+                404
+        ));
     }
 }

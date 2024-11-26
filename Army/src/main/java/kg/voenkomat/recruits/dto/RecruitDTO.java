@@ -13,5 +13,5 @@ public class RecruitDTO {
     Long id;
     String name;
     Integer age;
-    Boolean workability;
+    boolean workability;
 }

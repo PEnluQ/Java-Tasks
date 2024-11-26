@@ -4,13 +4,13 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+@Entity
+@Table(name = "recruits")
 @Getter
 @Setter
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "recruits")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Recruit {
     @Id
