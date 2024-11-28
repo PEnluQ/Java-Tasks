@@ -13,4 +13,5 @@ import lombok.experimental.FieldDefaults;
 public class ErrorResponse {
     Integer statusCode;
     String message;
+    String uuid;
 }
