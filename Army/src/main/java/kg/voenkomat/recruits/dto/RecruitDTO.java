@@ -1,14 +1,17 @@
 package kg.voenkomat.recruits.dto;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class RecruitDTO {
-    private Long id;
-    private String name;
-    private Integer age;
-    private Boolean workability;
+    Long id;
+    String name;
+    Integer age;
+    boolean workability;
 }

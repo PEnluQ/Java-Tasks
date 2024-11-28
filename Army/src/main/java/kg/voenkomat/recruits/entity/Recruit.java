@@ -2,24 +2,27 @@ package kg.voenkomat.recruits.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
+@Entity
+@Table(name = "recruits")
 @Getter
 @Setter
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "recruits")
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Recruit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
+
+    @Column(length = 20)//todo add all required params
+    String name;
 
     @Column
-    private String name;
+    Integer age;
 
     @Column
-    private Integer age;
-
-    @Column
-    private boolean workability;
+    boolean workability;
 }
