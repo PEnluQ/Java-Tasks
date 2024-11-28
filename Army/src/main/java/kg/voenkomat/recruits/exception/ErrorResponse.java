@@ -11,6 +11,6 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ErrorResponse {
-    String message;
     Integer statusCode;
+    String message;
 }

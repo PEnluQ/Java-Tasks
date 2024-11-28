@@ -3,6 +3,7 @@ package kg.voenkomat.recruits.service.impl;
 import kg.voenkomat.recruits.dto.RecruitDTO;
 import kg.voenkomat.recruits.entity.Recruit;
 import kg.voenkomat.recruits.exception.CustomException;
+import kg.voenkomat.recruits.exception.ErrorCode;
 import kg.voenkomat.recruits.mapper.RecruitMapper;
 import kg.voenkomat.recruits.repo.RecruitRepo;
 import kg.voenkomat.recruits.service.RecruitService;
@@ -59,8 +60,7 @@ public class RecruitServiceImpl implements RecruitService {
 
     private Recruit getById(Long id) {
         return recruitRepo.findById(id).orElseThrow(() -> new CustomException(
-                "Not found id %s".formatted(id),
-                404
+                ErrorCode.RESOURCE_NOT_FOUND
         ));
     }
 }

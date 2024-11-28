@@ -7,9 +7,9 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CustomException extends RuntimeException {
-    Integer statusCode;
-    public CustomException(String message, int statusCode) {
-        super(message);
-        this.statusCode = statusCode;
+    Integer httpStatus;
+    public CustomException(ErrorCode errorCode) {
+        super(errorCode.getMessage());
+        this.httpStatus = errorCode.getHttpStatus();
     }
 }
